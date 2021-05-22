@@ -3,7 +3,6 @@
 use Parser\Parser\ParserHandleCsv;
 require_once realpath("vendor/autoload.php");
 
-echo dirname(__FILE__);
 
 if ( isset($_POST["submit"]) && isset($_FILES["csv_task"])){
     if ($_FILES["csv_task"]["error"] > 0) {
@@ -11,7 +10,7 @@ if ( isset($_POST["submit"]) && isset($_FILES["csv_task"])){
     }
     else {
         if (file_exists(dirname(__FILE__)."/src/upload/" . $_FILES["csv_task"]["name"])) {
-            $storagename = "./src/upload/".$_FILES["csv_task"]["name"];
+            $storagename = dirname(__FILE__)."/src/upload/".$_FILES["csv_task"]["name"];
         }
         else {
             $storagename = $_FILES["csv_task"]["name"];
@@ -22,8 +21,11 @@ if ( isset($_POST["submit"]) && isset($_FILES["csv_task"])){
  }
 
     $reader = new ParserHandleCsv($storagename,'r+',true);
+
     $headers = $reader->getHeader();
+
     $rows = $reader->getRowsWithoutHeader();
+
     $transactions = $reader->exportAsTable('html','DESC');
 ?>
 <!DOCTYPE html>

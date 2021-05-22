@@ -89,7 +89,7 @@ class ParserHandleCsv {
      */
     public function __construct(string $path, string $mode ='r+', bool $header)
     {
-        
+
         if($this->checkFileAvaliable($path)){
             $this->path = $path;
             $this->mode = $mode;
@@ -133,10 +133,10 @@ class ParserHandleCsv {
     //return array using SPLFILE Object for reading CSV file
     public function handelCsvFile() : SplFileObject
     {
-        $output = new SplFileObject($this->path,$this->mode);
-        $output->setFlags(SplFileObject::READ_CSV | SplFileObject::READ_AHEAD | SplFileObject::SKIP_EMPTY);        
+        $output = new SplFileObject($this->path);
+        $output->setFlags(SplFileObject::READ_CSV | SplFileObject::READ_AHEAD); 
         $this->totallines = iterator_count($output);
-
+        
         return $output;
     }
 
@@ -155,6 +155,7 @@ class ParserHandleCsv {
         }
         return $header_object;
     }
+    
 
     //create transaction object without header line by reading CSV file line by line retrun ArrayObject
     //validate transaction object attribute on ParserEntity class.

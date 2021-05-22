@@ -4,7 +4,7 @@ namespace Parser\Traits;
 
 trait ValidateTraits {
 
-    public function verifyKey($record){
+    public static function verifyKey($record){
         
         $validChars = ['2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C','D', 'E', 'F', 'G', 'H', 'J', 'K','L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T','U', 'V', 'W', 'X', 'Y', 'Z'];
         if(strlen($record) != 10){
