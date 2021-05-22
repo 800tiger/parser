@@ -19,13 +19,16 @@ trait ValidateTraits {
             for($i = $code_length-1; $i >=0; $i--){
                 $codepoint = array_search($codearray[$i],$validChars);
                 $addend = $factor * $codepoint;
+                $factor = ($factor == 2) ? 1 : 2;
                 $addend = ($addend / $code_length) + ($addend % $code_length);
                 $sum += $addend;
             }
             $remainder = $sum % $code_length;
             $checkDigital = ($code_length - $remainder) % $code_length;
-
-            if($checkDigital != "00"){
+            
+            $validcode = $validChars[$checkDigital];
+            
+            if($validcode >= 4){
                 return true;
             }
             else{

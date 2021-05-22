@@ -87,18 +87,22 @@ class ParserHandleCsv {
      * @param string $mode
      * @return sqlFileObject
      */
-    public function __construct(string $path, string $mode ='r+', bool $header)
+    public function __construct(
+        string $path, 
+        string $mode ='r+', 
+        bool $header)
     {
-
-        if($this->checkFileAvaliable($path)){
-            $this->path = $path;
-            $this->mode = $mode;
-            $this->header = $header;
-            $this->output = $this->handelCsvFile();
-        }
+        if($this->checkFileAvaliable($path))
+            {
+                $this->path = $path;
+                $this->mode = $mode;
+                $this->header = $header;
+                $this->output = $this->handelCsvFile();
+            }
     }
 
-    public function setDelimiter(string $delimiter):void
+    public function setDelimiter(
+        string $delimiter):void
     {
         if (in_array($delimiter, $this->valide_string) !== true) {
             throw new \Exception('Delimiter is not valid.');
@@ -106,7 +110,8 @@ class ParserHandleCsv {
         $this->delimiter = $delimiter;
     } 
     
-    public function setEnclosure(string $enclosure):void
+    public function setEnclosure(
+        string $enclosure):void
     {
         if (in_array($enclosure, $this->valide_string) !== true) {
             throw new \Exception('Enclosure is not valid.');
@@ -134,9 +139,13 @@ class ParserHandleCsv {
     public function handelCsvFile() : SplFileObject
     {
         $output = new SplFileObject($this->path);
-        $output->setFlags(SplFileObject::READ_CSV | SplFileObject::READ_AHEAD); 
+        $output->setFlags(SplFileObject::READ_CSV 
+        | SplFileObject::READ_AHEAD 
+        | SplFileObject::SKIP_EMPTY 
+        | SplFileObject::DROP_NEW_LINE); 
+
         $this->totallines = iterator_count($output);
-        
+
         return $output;
     }
 
@@ -183,7 +192,8 @@ class ParserHandleCsv {
     }
     
     //sort by time function, need to use at view level.
-    public function sortBytime($desc) : array
+    public function sortBytime(
+        string $desc) : array
     {  
         $this->sort_by_time = $desc;
         usort($this->transactions, function($a, $b) {
@@ -202,7 +212,9 @@ class ParserHandleCsv {
     }
 
     // export csv as array for html, json for Typescript or api.
-    public function exportAsTable($exporttype,$orderBytime){
+    public function exportAsTable(
+        string $exporttype,
+        string $orderBytime){
 
         $this->getRowsWithoutHeader();
         $this->sortBytime($orderBytime);
@@ -214,7 +226,6 @@ class ParserHandleCsv {
         if($exporttype == 'json'){
             return json_encode($this->transactions);
         }
-        
     }
 
     /**
