@@ -1,7 +1,7 @@
 <?php
 
 use Parser\Parser\ParserHandleCsv;
-require_once realpath("vendor/autoload.php");
+require_once __DIR__.("/vendor/autoload.php");
 
 
 if ( isset($_POST["submit"]) && isset($_FILES["csv_task"])){

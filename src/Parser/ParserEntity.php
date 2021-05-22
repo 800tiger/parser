@@ -65,6 +65,7 @@ class ParserEntity {
         //set debit or credit flag in object
         public function setAmount($amount)
         {
+            //$fmt = new \NumberFormatter('en_US', \NumberFormatter::CURRENCY_ACCOUNTING);
             $fmt = new \NumberFormatter('en_US', \NumberFormatter::CURRENCY);
             $this->amount = $fmt->formatCurrency(number_format($amount/100, 2 ,'.',''),'USD');
             $check_debit = ($this->amount > 0) ? 'credit' : 'debit';
