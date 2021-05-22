@@ -1,4 +1,9 @@
 {
+    "name": "800tiger/parser",
+    "description": "CSV Object Importer Task",
+    "require": {
+        "php": "^7.3|^8.0"
+    },
     "autoload" :{
         "psr-4": {
             "Parser\\" : "src/"
