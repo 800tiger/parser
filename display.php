@@ -3,18 +3,20 @@
 use Parser\Parser\ParserHandleCsv;
 require_once realpath("vendor/autoload.php");
 
+echo dirname(__FILE__);
+
 if ( isset($_POST["submit"]) && isset($_FILES["csv_task"])){
     if ($_FILES["csv_task"]["error"] > 0) {
         echo "Return Code: " . $_FILES["csv_task"]["error"] . "<br />";
     }
     else {
-        if (file_exists("./src/upload/" . $_FILES["csv_task"]["name"])) {
+        if (file_exists(dirname(__FILE__)."/src/upload/" . $_FILES["csv_task"]["name"])) {
             $storagename = "./src/upload/".$_FILES["csv_task"]["name"];
         }
         else {
             $storagename = $_FILES["csv_task"]["name"];
-            move_uploaded_file($_FILES["csv_task"]["tmp_name"], "./src/upload/" . $storagename);
-            $storagename = "./src/upload/".$storagename;
+            move_uploaded_file($_FILES["csv_task"]["tmp_name"], dirname(__FILE__)."/src/upload/" . $storagename);
+            $storagename = dirname(__FILE__)."/src/upload/".$storagename;
         }
     }
  }
