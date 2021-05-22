@@ -1,10 +1,28 @@
 {
     "name": "800tiger/parser",
+    "type": "library",
     "description": "CSV Object Importer Task",
+    "keywords" : ["csv","parser"],
+    "license" : "MIT",
+    "authors" : [
+        {
+            "name" : "800 tiger",
+            "email" : "wudi.cladyata@gmail.com",
+            "role" : "web developer"
+        }
+    ],
     "require": {
         "php": "^7.3|^8.0"
     },
+    "require-dev": {
+        "phpunit/phpnunit": "4.*"
+    },
     "autoload" :{
+        "psr-4": {
+            "Parser\\" : "src/"
+        }
+    },
+    "autoload-dev" :{
         "psr-4": {
             "Parser\\" : "src/"
         }
