@@ -1,35 +1,35 @@
 <?php
 
 use Parser\Parser\ParserHandleCsv;
-require_once __DIR__.("/vendor/autoload.php");
+
+require_once __DIR__ . ("/vendor/autoload.php");
 
 
-if ( isset($_POST["submit"]) && isset($_FILES["csv_task"])){
+if (isset($_POST["submit"]) && isset($_FILES["csv_task"])) {
     if ($_FILES["csv_task"]["error"] > 0) {
         echo "Return Code: " . $_FILES["csv_task"]["error"] . "<br />";
-    }
-    else {
-        if (file_exists(dirname(__FILE__)."/src/upload/" . $_FILES["csv_task"]["name"])) {
-            $storagename = dirname(__FILE__)."/src/upload/".$_FILES["csv_task"]["name"];
-        }
-        else {
+    } else {
+        if (file_exists(dirname(__FILE__) . "/src/upload/" . $_FILES["csv_task"]["name"])) {
+            $storagename = dirname(__FILE__) . "/src/upload/" . $_FILES["csv_task"]["name"];
+        } else {
             $storagename = $_FILES["csv_task"]["name"];
-            move_uploaded_file($_FILES["csv_task"]["tmp_name"], dirname(__FILE__)."/src/upload/" . $storagename);
-            $storagename = dirname(__FILE__)."/src/upload/".$storagename;
+            move_uploaded_file($_FILES["csv_task"]["tmp_name"], dirname(__FILE__) . "/src/upload/" . $storagename);
+            $storagename = dirname(__FILE__) . "/src/upload/" . $storagename;
         }
     }
- }
+}
 
-    $reader = new ParserHandleCsv($storagename,'r+',true);
+$reader = new ParserHandleCsv($storagename, 'r+', true);
 
-    $headers = $reader->getHeader();
+$headers = $reader->getHeader();
 
-    $rows = $reader->getRowsWithoutHeader();
+$rows = $reader->getRowsWithoutHeader();
 
-    $transactions = $reader->exportAsTable('html','DESC');
+$transactions = $reader->exportAsTable('html', 'DESC');
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -44,15 +44,18 @@ if ( isset($_POST["submit"]) && isset($_FILES["csv_task"])){
             min-width: 400px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
         }
+
         .styled-table thead tr {
             background-color: #009879;
             color: #ffffff;
             text-align: left;
         }
+
         .styled-table th,
         .styled-table td {
             padding: 12px 15px;
         }
+
         .styled-table tbody tr {
             border-bottom: 1px solid #dddddd;
         }
@@ -66,31 +69,28 @@ if ( isset($_POST["submit"]) && isset($_FILES["csv_task"])){
         }
     </style>
 </head>
+
 <body>
     <div class="table">
         <table class="styled-table">
-        <tr>
-        <?php foreach($headers->headers as $head):?>
-            <th><?php echo $head?></th>
-        <?php endforeach; ?>
-            <th><?php echo $headers->validate?></th>
-        </tr>
-        <?php foreach($transactions as $ts):?>
-        <tr>
-            <td><?php echo $ts->date;?></td>
-            <td><?php echo $ts->transactioncode;?></td>
-            <td><?php echo $ts->customernumber;?></td>
-            <td><?php echo $ts->reference;?></td>
-            <td><?php echo $ts->amount;?></td>
-            <td><?php echo $ts->validate;?></td>
-        </tr>
-        <?php endforeach; ?>
+            <tr>
+                <?php foreach ($headers->headers as $head) : ?>
+                    <th><?php echo $head ?></th>
+                <?php endforeach; ?>
+                <th><?php echo $headers->validate ?></th>
+            </tr>
+            <?php foreach ($transactions as $ts) : ?>
+                <tr>
+                    <td><?php echo $ts->date; ?></td>
+                    <td><?php echo $ts->transactioncode; ?></td>
+                    <td><?php echo $ts->customernumber; ?></td>
+                    <td><?php echo $ts->reference; ?></td>
+                    <td><?php echo $ts->amount; ?></td>
+                    <td><?php echo $ts->validate; ?></td>
+                </tr>
+            <?php endforeach; ?>
         </table>
     </div>
 </body>
+
 </html>
-
-    
-
-
-

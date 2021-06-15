@@ -1,32 +1,38 @@
 <?php
+
 namespace Parser\Parser;
 
-class ParserHeader {
-        
-        //new column for transaction validation
-        public $validate;
+class ParserHeader
+{
 
-        public $headers;
+    //new column for transaction validation
+    public $validate;
 
-        public function __construct(array $headers, string $validate){
-            $this->headers = $headers;
-            $this->setValidate($validate);
-        }
+    public $headers;
 
-        public function setHeaders($headers){
-            $this->headers = $headers;
-        }
+    public function __construct(array $headers, string $validate)
+    {
+        $this->headers = $headers;
+        $this->setValidate($validate);
+    }
 
-        public function setValidate($validate)
-        {
-            $this->validate = $validate;
-        }
+    public function setHeaders($headers)
+    {
+        $this->headers = $headers;
+    }
 
-        public function getHeaders(){
-            return $this->headers;
-        }
+    public function setValidate($validate)
+    {
+        $this->validate = $validate;
+    }
 
-        public function getValidate(){
-            return $this->validate;
-        }
+    public function getHeaders()
+    {
+        return $this->headers;
+    }
+
+    public function getValidate()
+    {
+        return $this->validate;
+    }
 }
