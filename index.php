@@ -1,12 +1,7 @@
-</html>
 <!DOCTYPE html>
-<html lang="en">
-<header>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSV Object Importer Task</title>
-</header>
+<html>
+<head>
+</head>
 <body>
     <div>
         <form action="display.php" method="POST" enctype="multipart/form-data">
@@ -16,3 +11,4 @@
     </div>
 </body>
 </html>
+
